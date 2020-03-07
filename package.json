@@ -1,0 +1,11 @@
+{
+  "name": "css-nodeserver-v1",
+  "version": "1.0.0",
+  "description": "Production Ready MEAN Stack Base Template V1 - Node API Server",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gauri",
+  "license": "ISC"
+}
