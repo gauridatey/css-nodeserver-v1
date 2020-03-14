@@ -6,7 +6,7 @@ const app = express();
 
 // cors options
 app.options('*', cors());
-const whitelist = "http://localhost:4200";
+const whitelist = "http://localhost:4200,http://localhost:5200,http://localhost:6200,";
 const corsOptions = {
   origin: (origin, callback) => {
     // allow requests with no origin
