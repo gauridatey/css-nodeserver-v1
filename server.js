@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const mongoose = require('mongoose');
+const apiRoutes = require('./src/routes/index');
+require('./src/shared/dbconfig');
 
 const app = express();
 
@@ -21,33 +22,9 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-
-// There are several deprecations in the MongoDB Node.js driver 
-// Set mongoose options to fix all deprecation warnings
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useFindAndModify', false);
-mongoose.set('useCreateIndex', true);
-mongoose.set('useUnifiedTopology', true);
-
-// DB connection
-mongoose.connect(`mongodb://localhost:27017/css-nodeserver`);
-
-// verification of DB connection
-mongoose.connection.on('connected', () => {
-  console.log('Mongoose connection is successful ');
-});
-//
-const healthcheckSchema = new mongoose.Schema({
-  message: String
-});
-
-HealtcheckModel = mongoose.model('healthcheck', healthcheckSchema);
-
-app.get('/api/healthcheck', async (req, res) => {
-  const healthcheck = await HealtcheckModel.findOne();
-  res.json({"message":healthcheck.message});
-});
+// attach main api routes
+app.use('/api', apiRoutes);
 
 app.listen(3000, () => {
-  console.log(`Node server started on port: 3000`);
+  console.log(`Node server started on: http://localhost:3000`);
 });
