@@ -7,7 +7,7 @@ mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
 // DB connection
-mongoose.connect(`mongodb://localhost:27017/css-nodeserver`);
+mongoose.connect(`mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}`);
 
 // verification of DB connection
 mongoose.connection.on('connected', () => {

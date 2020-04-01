@@ -7,7 +7,7 @@ const app = express();
 
 // cors options
 app.options('*', cors());
-const whitelist = "http://localhost:4200,http://localhost:5200,http://localhost:6200,";
+const whitelist = process.env.CORS_WHITELIST.split(',')
 const corsOptions = {
   origin: (origin, callback) => {
     // allow requests with no origin
@@ -24,7 +24,6 @@ app.use(cors(corsOptions));
 
 // attach main api routes
 app.use('/api', apiRoutes);
-
-app.listen(3000, () => {
-  console.log(`Node server started on: http://localhost:3000`);
+app.listen(process.env.PORT, () => {
+  console.log(`Node server started on: http://${process.env.HOST}:${process.env.PORT}`);
 });
