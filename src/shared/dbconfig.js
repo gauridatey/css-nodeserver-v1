@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const logger = require('./logger');
 
 // Set mongoose options
 mongoose.set('useNewUrlParser', true);
@@ -11,7 +12,7 @@ mongoose.connect(`mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${proc
 
 // verification of DB connection
 mongoose.connection.on('connected', () => {
-  console.log('Mongoose connection is successful ');
+  logger.info('Mongoose connection is successful ');
 });
 
 module.exports = mongoose;

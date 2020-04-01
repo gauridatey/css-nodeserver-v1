@@ -1,6 +1,10 @@
 const express = require('express');
 const cors = require('cors');
 const apiRoutes = require('./src/routes/index');
+const morgan = require('morgan');
+const logger = require('./src/shared/logger');
+const httplogger = require('./src/shared/httplogger');
+
 require('./src/shared/dbconfig');
 
 const app = express();
@@ -22,8 +26,12 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+// use winston httplogger along with morgan
+app.use(morgan('combined', { stream: httplogger.stream }));
+
 // attach main api routes
 app.use('/api', apiRoutes);
+
 app.listen(process.env.PORT, () => {
-  console.log(`Node server started on: http://${process.env.HOST}:${process.env.PORT}`);
+  logger.info(`Node server started on: http://${process.env.HOST}:${process.env.PORT}`);
 });
