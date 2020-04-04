@@ -32,6 +32,19 @@ app.use(morgan('combined', { stream: httplogger.stream }));
 // attach main api routes
 app.use('/api', apiRoutes);
 
+// handle 404
+app.use((req, res) => {
+  res.status(404).json({ message: `Route${req.url} Not found.` });
+});
+
+// below needs to be at the end of all
+app.use((error, req, res, next) => {
+  // Any request to this server will get here, and will send an HTTP
+  logger.error(`Generic Error: ${error.message}`);
+  res.status(500).json({ message: `Generic Error: ${error.message}` });
+  next(error);
+});
+
 app.listen(process.env.PORT, () => {
   logger.info(`Node server started on: http://${process.env.HOST}:${process.env.PORT}`);
 });
