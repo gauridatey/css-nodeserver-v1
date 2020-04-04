@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const apiRoutes = require('./src/routes/index');
 const morgan = require('morgan');
+const apiRoutes = require('./src/routes/index');
 const logger = require('./src/shared/logger');
 const httplogger = require('./src/shared/httplogger');
 
@@ -11,7 +11,7 @@ const app = express();
 
 // cors options
 app.options('*', cors());
-const whitelist = process.env.CORS_WHITELIST.split(',')
+const whitelist = process.env.CORS_WHITELIST.split(',');
 const corsOptions = {
   origin: (origin, callback) => {
     // allow requests with no origin
@@ -22,7 +22,7 @@ const corsOptions = {
       return callback(new Error(msg), false);
     }
     return callback(null, true);
-  }
+  },
 };
 app.use(cors(corsOptions));
 

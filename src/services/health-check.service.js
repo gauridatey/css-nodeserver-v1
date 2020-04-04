@@ -5,5 +5,5 @@ const getHealthcheckResponse = () => {
 };
 
 module.exports = {
-  getHealthcheckResponse
+  getHealthcheckResponse,
 };

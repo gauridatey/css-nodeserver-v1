@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const HealthcheckSchema = new Schema({
-  message: String
+  message: String,
 });
 
 // Create and Export the model
