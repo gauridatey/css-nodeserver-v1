@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const apiRoutes = require('./src/routes/index');
 const logger = require('./src/shared/logger');
 const httplogger = require('./src/shared/httplogger');
+const i18n = require('./src/shared/i18n');
 
 require('./src/shared/dbconfig');
 
@@ -28,6 +29,9 @@ app.use(cors(corsOptions));
 
 // use winston httplogger along with morgan
 app.use(morgan('combined', { stream: httplogger.stream }));
+
+// i18n init
+app.use(i18n.init);
 
 // attach main api routes
 app.use('/api', apiRoutes);
